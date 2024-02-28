@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Sign Up{% endblock title %}
+{% block content %}
+
+
+<h1>Sign Up</h1>
+<form method="post" action= '.'>
+
+    {% csrf_token %}
+    <!-- for not doing styling write like this -->
+    <!-- {{form.as_p}} -->
+    <!-- for doing styling by yourself write like this way -->
+    
+    <div>
+        <label>Username</label>
+        {{form.username}}
+    </div>
+    <div>
+        <label>Email</label>
+        {{form.email}}
+    </div>
+    <div>
+        <label>New Password</label>
+        {{form.password1}}
+    </div>
+    <div>
+        <label>Confirm Password</label>
+        {{form.password2}}
+    </div>
+
+    {% if form.errors or form.non_field_errors %}
+    <div>
+{% for field in form %}
+{{field.errors}}
+{% endfor %}
+{{form.non_field_errors}}
+    </div>
+    
+    {% endif %}
+
+    
+    <button>Submit</button>
+
+</form>
+
+
+{% endblock content %}

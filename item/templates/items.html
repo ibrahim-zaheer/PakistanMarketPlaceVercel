@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Searching Item{% endblock title %}
+
+{% block content %}
+<div class = 'parentFlex'>
+
+
+    <form method = "get" action="{% url "item:items" %}">
+       <input type="text" name="query" value="{{query}}"placeholder = "find a bike or a car">
+       <button>Search</button>
+    </form>
+<p>Categories</p>
+<ul>
+    {% for category in categories %}
+    
+    <li {% if category.id == category_id %}{% endif %}>
+        <a href="{% url "item:items" %}?query={{query}}&category={{category.id}}">{{category.name}}</a>
+    </li>
+    
+    
+    {% endfor %}
+    <ul>
+      <li>
+        <a href="{% url "item:items" %}">Clear Filter</a>
+      </li>
+    </ul>
+</ul>
+</div>
+<div class="container-fluid p-3 my-3 bg-dark text-white">
+  
+    {% for item in items %}
+    <div>
+        <div class="card-rows">
+            <div class="col-md-3 mb-4">
+              <a href="{% url "item:detail" item.id %}">
+                <div class="card">
+                  <img class="card-img-top" src="{{item.image.url}}" width="100" height="200" alt="Card image">
+                  <div class="card-body">
+                    <h4 class="card-title">{{item.name}}</h4>
+                    <p class="card-text">{{item.description}}</p>
+                   
+                    
+                  </div>
+                </div>
+              </a>
+            </div>
+    </div>
+    {% endfor %}
+    
+    
+    </div>  
+
+{% endblock content %}
