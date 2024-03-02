@@ -16,6 +16,7 @@ class conversation(models.Model):
         ordering = ('-modified_at',)
 
 class conversationMessage(models.Model):
+    # the related_name will be  used to access this field in html tag
     conversation = models.ForeignKey(conversation,related_name = "messages",on_delete = models.CASCADE)
     content = models.TextField()
         # now whnever we use this model, modified_at will add the updated value

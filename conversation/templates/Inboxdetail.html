@@ -1,8 +1,8 @@
 {% extends "pmpapp/base.html" %}
-{% block title %}Inbox{% endblock title %}
+{% block title %}Conversation{% endblock title %}
 {% block content %}
-<h1>Inbox</h1>
-<h1>Inbox</h1>
+<h1>Conversation</h1>
+
 
 <div>
     {% for conversation in conversations %}
@@ -10,22 +10,26 @@
 
         <div>
             <div>
-                <img src="{{conversation.item.image.url}}" alt="">
+               
                 <div>
                     {% comment %} in python this is the way to access 
                     all data of single field of a model {% endcomment %}
-                   {% for member in conversation.members.all  %}
+                   {% for message in conversation.messages.all  %}
                    {% comment %} next we write this code to check whether the user 
                    who clicks to view inbox is also user who sent the request {% endcomment %}
-                   {% if member != request.user %}
-                   <div>{{member.username}}  |  {{conversation.modified_at}}</div>
-                   
-                   <a href="{% url "conversation:detail" conversation.id %}"><p>{{conversation.item.name}}</p> </a>
-                   
-                   {% endif %}
+                  <div>
+                    <p>
+                        {{message.created_by.username}} @  {{message.created_at}}
+                    </p>
+                    <p>
+                        {{message.content}} 
+                    </p>
+
+                  </div>
                    
                    {% endfor %}
                 </div>
+            
             </div>
 
         </div>
@@ -34,5 +38,12 @@
    
     
     {% endfor %}
+    <form method="post" action="."> 
+        {% csrf_token %}
+        {{form.as_p}}
+         
+    <button>Send</button>
+    </form>
+
 </div>
 {% endblock content %}

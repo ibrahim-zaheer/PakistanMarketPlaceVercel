@@ -17,8 +17,7 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="{% url "pmpapp:index" %}">Home</a>
-              <a class="nav-link" href="#">New Item</a>
-              <a class="nav-link" href="#">Browse</a>
+             
               {% comment %} write this code to apply a login that if user exists then allow it to go forward {% endcomment %}
               {% if request.user.is_authenticated %}
               <a class="nav-link active" aria-current="page" href="{% url "conversation:inbox" %}">Inbox</a>

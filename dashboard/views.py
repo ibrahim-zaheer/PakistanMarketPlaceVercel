@@ -10,3 +10,5 @@ def index(request):
     #let django handle it
     items = Item.objects.filter(created_by = request.user)
     return render(request,'dashboard.html',{'items':items})
+
+
